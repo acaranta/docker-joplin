@@ -3,7 +3,7 @@ FROM jlesage/baseimage-gui:ubuntu-18.04
 RUN apt-get update && apt-get install -y wget libnss3 libgtk-3-0 libxss1 libasound2
 RUN useradd --shell /sbin/nologin --home /app --uid 1000  -G users appuser
 RUN mkdir /app && chown appuser -Rfv /app
-ADD joplin /app/.joplin
+#ADD joplin /app/.joplin
 USER appuser
 RUN echo $USER
 WORKDIR /app
