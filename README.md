@@ -19,3 +19,4 @@ services:
       - 5800:5800
 ```
 
+NB : the volume for config/data files must be read/write for UID/GID 1000/1000
