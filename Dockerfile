@@ -13,5 +13,5 @@ RUN TERM=xterm /app/install-joplin.sh --allow-root
 RUN /app/.joplin/Joplin.AppImage --appimage-extract
 ADD startapp.sh /startapp.sh
 USER root
-#RUN APP_ICON_URL=file:///app/squashfs-root//joplin.png && install_app_icon.sh "$APP_ICON_URL"
+RUN APP_ICON_URL=file:///app/squashfs-root//joplin.png && install_app_icon.sh "$APP_ICON_URL"
 ENV APP_NAME="Joplin"
