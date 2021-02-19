@@ -2,4 +2,4 @@
 cd /app 
 USER=appuser 
 HOME="/app"
-exec /app/squashfs-root/joplin --no-sandbox
+exec /app/squashfs-root/AppRun --no-sandbox
