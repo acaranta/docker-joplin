@@ -6,7 +6,7 @@ RUN mkdir /app && chown appuser -Rfv /app
 USER appuser
 RUN echo $USER
 WORKDIR /app
-RUN wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh >/app/install-joplin.sh && chmod +x /app/install-joplin.sh
+RUN wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh >/app/install-joplin.sh && chmod +x /app/install-joplin.sh
 RUN TERM=xterm /app/install-joplin.sh --allow-root --prerelease --force
 RUN /app/.joplin/Joplin.AppImage --appimage-extract
 ENV APPDIR=/app/squashfs-root
