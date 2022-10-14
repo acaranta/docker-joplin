@@ -7,7 +7,7 @@ USER appuser
 RUN echo $USER
 WORKDIR /app
 RUN wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh >/app/install-joplin.sh && chmod +x /app/install-joplin.sh
-RUN TERM=xterm /app/install-joplin.sh --allow-root --prerelease --force
+RUN TERM=xterm /app/install-joplin.sh --allow-root --force
 RUN /app/.joplin/Joplin.AppImage --appimage-extract
 ENV APPDIR=/app/squashfs-root
 ADD startapp.sh /startapp.sh
