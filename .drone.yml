@@ -1,0 +1,10 @@
+---
+kind: template
+load: docker-build-multiarch.yaml
+data:
+  dockerfiledir: .
+  hubimagename: docker-joplin
+  repotype: hub
+  imagetag: latest  
+  branches: ['master', 'main']
+  buildarch: linux/amd64
