@@ -1,6 +1,6 @@
-FROM jlesage/baseimage-gui:ubuntu-18.04
+FROM jlesage/baseimage-gui:ubuntu-22.04-v4
 
-RUN apt-get update && apt-get install -y wget libnss3 libgtk-3-0 libxss1 libasound2 libgbm1
+RUN apt-get update && apt-get install -y wget libnss3 libgtk-3-0 libxss1 libasound2 libgbm1 libfuse2
 RUN useradd --shell /sbin/nologin --home /app --uid 1000  -G users appuser
 RUN mkdir /app && chown appuser -Rfv /app
 USER appuser
