@@ -1,6 +1,6 @@
 FROM jlesage/baseimage-gui:debian-13-v4
 
-RUN apt-get update && add-pkg wget libnss3 libgtk-3-0 libxss1 libasound2 libgbm1 libfuse2
+RUN apt-get update && add-pkg wget libnss3 libgtk-3-0 libxss1 libasound2 libgbm1 libfuse2 ca-certificates
 RUN useradd --shell /sbin/nologin --home /app --uid 1000  -G users appuser
 RUN mkdir /app && chown appuser -Rfv /app
 USER appuser
