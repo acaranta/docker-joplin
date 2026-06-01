@@ -1,16 +1,20 @@
 FROM jlesage/baseimage-gui:debian-13-v4
 
 RUN apt-get update && add-pkg wget libnss3 libgtk-3-0 libxss1 libasound2 libgbm1 libfuse2 ca-certificates
-# Create appuser with UID 1000. If UID 1000 already exists in the base image,
-# reconfigure that account to match the desired parameters instead of failing.
+# Use the "app" user with UID 1000. If it (or any UID 1000 account) already
+# exists in the base image, reconfigure it to match the desired parameters;
+# otherwise create it.
 RUN if getent passwd 1000 >/dev/null; then \
         existing_user="$(getent passwd 1000 | cut -d: -f1)"; \
-        usermod --login appuser --home /app --shell /sbin/nologin --groups users "$existing_user"; \
+        if [ "$existing_user" != "app" ]; then \
+            usermod --login app "$existing_user"; \
+        fi; \
+        usermod --home /app --shell /sbin/nologin --groups users app; \
     else \
-        useradd --shell /sbin/nologin --home-dir /app --uid 1000 -G users appuser; \
+        useradd --shell /sbin/nologin --home-dir /app --uid 1000 -G users app; \
     fi
-RUN mkdir /app && chown appuser -Rfv /app
-USER appuser
+RUN mkdir /app && chown app -Rfv /app
+USER app
 RUN echo $USER
 WORKDIR /app
 RUN wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh >/app/install-joplin.sh && chmod +x /app/install-joplin.sh
