@@ -1,7 +1,14 @@
 FROM jlesage/baseimage-gui:debian-13-v4
 
 RUN apt-get update && add-pkg wget libnss3 libgtk-3-0 libxss1 libasound2 libgbm1 libfuse2 ca-certificates
-RUN useradd --shell /sbin/nologin --home /app --uid 1000  -G users appuser
+# Create appuser with UID 1000. If UID 1000 already exists in the base image,
+# reconfigure that account to match the desired parameters instead of failing.
+RUN if getent passwd 1000 >/dev/null; then \
+        existing_user="$(getent passwd 1000 | cut -d: -f1)"; \
+        usermod --login appuser --home /app --shell /sbin/nologin --groups users "$existing_user"; \
+    else \
+        useradd --shell /sbin/nologin --home-dir /app --uid 1000 -G users appuser; \
+    fi
 RUN mkdir /app && chown appuser -Rfv /app
 USER appuser
 RUN echo $USER
