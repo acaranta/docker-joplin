@@ -1,5 +1,4 @@
 #!/bin/sh
 cd /app 
-USER=appuser 
-HOME="/app"
-exec /app/squashfs-root/AppRun --no-sandbox
+umask "$UMASK"
+exec su-exec "$PUID:$PGID" /app/squashfs-root/AppRun --no-sandbox
